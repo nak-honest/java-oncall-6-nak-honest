@@ -1,5 +1,6 @@
 package oncall.controller;
 
+import oncall.domain.EmergencyWorkerOrder;
 import oncall.domain.date.Dates;
 import oncall.dto.WorkMonthDto;
 import oncall.service.EmergencyWorkdaysService;
@@ -19,5 +20,7 @@ public class EmergencyWorkdaysController {
 
     public void run() {
         Dates workDates = emergencyWorkdaysService.getWorkDates(inputView.readWorkMonth());
+        EmergencyWorkerOrder emergencyNonHolidayWorkerOrder =
+                emergencyWorkdaysService.getEmergencyWorkerOrder(inputView.readNonHolidayEmergencyWorkers());
     }
 }

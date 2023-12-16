@@ -1,6 +1,7 @@
 package oncall.domain.date;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Dates {
@@ -32,5 +33,9 @@ public class Dates {
 
     private boolean isHoliday(Date date) {
         return StatutoryHolidays.isStatutoryHoliday(date) || date.isDayType(DayType.WEEKEND);
+    }
+
+    public List<Date> getDates() {
+        return Collections.unmodifiableList(dates);
     }
 }

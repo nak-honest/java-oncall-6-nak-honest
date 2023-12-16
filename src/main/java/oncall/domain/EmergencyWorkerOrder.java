@@ -1,5 +1,7 @@
 package oncall.domain;
 
+import oncall.domain.iterator.LoopIterator;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -33,7 +35,11 @@ public final class EmergencyWorkerOrder {
         }
     }
 
-    public List<Object> getWorkers() {
+    public List<Worker> getWorkers() {
         return Collections.unmodifiableList(workers);
+    }
+
+    public LoopIterator<Worker> getLoopIterator() {
+        return new LoopIterator<>(workers);
     }
 }

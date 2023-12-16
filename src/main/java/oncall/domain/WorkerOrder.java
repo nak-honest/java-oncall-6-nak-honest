@@ -3,16 +3,15 @@ package oncall.domain;
 import oncall.domain.iterator.LoopIterator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public final class EmergencyWorkerOrder {
+public final class WorkerOrder {
     private static final int MIN_WORKER_COUNT = 5;
     private static final int MAX_WORKER_COUNT = 35;
 
     private final List<Worker> workers;
 
-    public EmergencyWorkerOrder(List<Worker> workers) {
+    public WorkerOrder(List<Worker> workers) {
         this.workers = new ArrayList<>(workers);
         validate();
     }
@@ -35,15 +34,15 @@ public final class EmergencyWorkerOrder {
         }
     }
 
-    public boolean hasSameWorker(EmergencyWorkerOrder otherWorkerOrder) {
+    public boolean isSameWorkers(WorkerOrder otherWorkerOrder) {
         return hasSameSize(otherWorkerOrder) && containsAll(otherWorkerOrder);
     }
 
-    private boolean hasSameSize(EmergencyWorkerOrder otherWorkerOrder) {
+    private boolean hasSameSize(WorkerOrder otherWorkerOrder) {
         return workers.size() == otherWorkerOrder.workers.size();
     }
 
-    private boolean containsAll(EmergencyWorkerOrder otherWorkerOrder) {
+    private boolean containsAll(WorkerOrder otherWorkerOrder) {
         return workers.containsAll(otherWorkerOrder.workers);
     }
 

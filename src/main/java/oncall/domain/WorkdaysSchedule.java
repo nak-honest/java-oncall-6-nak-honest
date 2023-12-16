@@ -1,14 +1,13 @@
 package oncall.domain;
 
-import oncall.domain.date.Date;
 import oncall.domain.date.WorkDate;
 
 import java.util.*;
 
-public class EmergencyWorkdaysSchedule {
+public class WorkdaysSchedule {
     private final List<WorkDate> workDates;
 
-    public EmergencyWorkdaysSchedule(List<WorkDate> workDates) {
+    public WorkdaysSchedule(List<WorkDate> workDates) {
         this.workDates = new ArrayList<>(workDates);
     }
 

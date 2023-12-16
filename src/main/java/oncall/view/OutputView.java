@@ -1,6 +1,6 @@
 package oncall.view;
 
-import oncall.domain.EmergencyWorkdaysSchedule;
+import oncall.domain.WorkdaysSchedule;
 import oncall.domain.date.DateType;
 import oncall.domain.date.DayType;
 import oncall.domain.date.WorkDate;
@@ -15,10 +15,10 @@ public class OutputView {
         this.writer = writer;
     }
 
-    public void writeEmergencyWorkdaysSchedule(EmergencyWorkdaysSchedule emergencyWorkdaysSchedule) {
+    public void writeEmergencyWorkdaysSchedule(WorkdaysSchedule workdaysSchedule) {
         writer.writeLine("");
 
-        emergencyWorkdaysSchedule.getWorkDates().forEach(this::writeWorkDate);
+        workdaysSchedule.getWorkDates().forEach(this::writeWorkDate);
     }
 
     private void writeWorkDate(WorkDate workDate) {

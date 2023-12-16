@@ -2,16 +2,6 @@ package oncall.domain.date;
 
 import java.util.Arrays;
 
-/*
-1월 1일
-3월 1일
-5월 5일
-6월 6일
-8월 15일
-10월 3일
-10월 9일
-12월 25일
- */
 public enum StatutoryHolidays {
     NEW_YEAR(Month.JANUARY, 1),
     INDEPENDENCE_MOVEMENT_DAY(Month.MARCH, 1),

@@ -10,10 +10,10 @@ import oncall.dto.WorkMonthDto;
 import java.util.List;
 
 public class EmergencyWorkdaysService {
-    private final EmergencyWorkdaysScheduler emergencyWorkdaysScheduler;
+    private final WorkdaysScheduler workdaysScheduler;
 
-    public EmergencyWorkdaysService(EmergencyWorkdaysScheduler emergencyWorkdaysScheduler) {
-        this.emergencyWorkdaysScheduler = emergencyWorkdaysScheduler;
+    public EmergencyWorkdaysService(WorkdaysScheduler workdaysScheduler) {
+        this.workdaysScheduler = workdaysScheduler;
     }
 
     public Dates getWorkDates(WorkMonthDto workMonthDto) {
@@ -23,13 +23,13 @@ public class EmergencyWorkdaysService {
         return DateFactory.createDates(month, startDayOfWeek);
     }
 
-    public EmergencyWorkerOrder getEmergencyWorkerOrder(List<String> workers) {
-        return new EmergencyWorkerOrder(workers.stream()
+    public WorkerOrder getEmergencyWorkerOrder(List<String> workers) {
+        return new WorkerOrder(workers.stream()
                 .map(Worker::new)
                 .toList());
     }
 
-    public EmergencyWorkdaysSchedule schedule(Dates workDates, EmergencyWorkerOrders emergencyWorkerOrders) {
-        return emergencyWorkdaysScheduler.schedule(workDates, emergencyWorkerOrders);
+    public WorkdaysSchedule schedule(Dates workDates, WorkerOrders workerOrders) {
+        return workdaysScheduler.schedule(workDates, workerOrders);
     }
 }

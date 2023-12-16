@@ -2,7 +2,7 @@ package oncall;
 
 import camp.nextstep.edu.missionutils.Console;
 import oncall.controller.EmergencyWorkdaysController;
-import oncall.domain.EmergencyWorkdaysScheduler;
+import oncall.domain.WorkdaysScheduler;
 import oncall.service.EmergencyWorkdaysService;
 import oncall.view.InputView;
 import oncall.view.OutputView;
@@ -13,8 +13,8 @@ public class Application {
         Writer writer = new Writer(System.out::print, System.out::println);
         InputView inputView = new InputView(Console::readLine, writer);
         OutputView outputView = new OutputView(writer);
-        EmergencyWorkdaysScheduler emergencyWorkdaysScheduler = new EmergencyWorkdaysScheduler();
-        EmergencyWorkdaysService emergencyWorkdaysService = new EmergencyWorkdaysService(emergencyWorkdaysScheduler);
+        WorkdaysScheduler workdaysScheduler = new WorkdaysScheduler();
+        EmergencyWorkdaysService emergencyWorkdaysService = new EmergencyWorkdaysService(workdaysScheduler);
 
         EmergencyWorkdaysController controller =
                 new EmergencyWorkdaysController(inputView, outputView, emergencyWorkdaysService);

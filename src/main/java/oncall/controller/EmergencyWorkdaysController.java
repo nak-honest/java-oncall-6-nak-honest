@@ -1,8 +1,8 @@
 package oncall.controller;
 
-import oncall.domain.EmergencyWorkdaysSchedule;
-import oncall.domain.EmergencyWorkerOrder;
-import oncall.domain.EmergencyWorkerOrders;
+import oncall.domain.WorkdaysSchedule;
+import oncall.domain.WorkerOrder;
+import oncall.domain.WorkerOrders;
 import oncall.domain.date.Dates;
 import oncall.dto.WorkMonthDto;
 import oncall.service.EmergencyWorkdaysService;
@@ -10,14 +10,13 @@ import oncall.util.ExceptionRetryHandler;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
-import java.util.List;
-
 public class EmergencyWorkdaysController {
     private final InputView inputView;
     private final OutputView outputView;
     private final EmergencyWorkdaysService emergencyWorkdaysService;
 
-    public EmergencyWorkdaysController(InputView inputView, OutputView outputView, EmergencyWorkdaysService emergencyWorkdaysService) {
+    public EmergencyWorkdaysController(InputView inputView, OutputView outputView,
+                                       EmergencyWorkdaysService emergencyWorkdaysService) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.emergencyWorkdaysService = emergencyWorkdaysService;
@@ -25,13 +24,13 @@ public class EmergencyWorkdaysController {
 
     public void run() {
         Dates workDates = ExceptionRetryHandler.retryUntilValid(this::selectWorkDates);
-        EmergencyWorkerOrders emergencyWorkerOrders =
+        WorkerOrders workerOrders =
                 ExceptionRetryHandler.retryUntilValid(this::selectEmergencyWorkerOrders);
 
-        EmergencyWorkdaysSchedule emergencyWorkdaysSchedule =
-                emergencyWorkdaysService.schedule(workDates, emergencyWorkerOrders);
+        WorkdaysSchedule workdaysSchedule =
+                emergencyWorkdaysService.schedule(workDates, workerOrders);
 
-        outputView.writeEmergencyWorkdaysSchedule(emergencyWorkdaysSchedule);
+        outputView.writeEmergencyWorkdaysSchedule(workdaysSchedule);
     }
 
     private Dates selectWorkDates() {
@@ -39,12 +38,12 @@ public class EmergencyWorkdaysController {
         return emergencyWorkdaysService.getWorkDates(workMonthDto);
     }
 
-    private EmergencyWorkerOrders selectEmergencyWorkerOrders() {
-        EmergencyWorkerOrder emergencyNonHolidayWorkerOrder =
+    private WorkerOrders selectEmergencyWorkerOrders() {
+        WorkerOrder emergencyNonHolidayWorkerOrder =
                 emergencyWorkdaysService.getEmergencyWorkerOrder(inputView.readNonHolidayEmergencyWorkers());
-        EmergencyWorkerOrder emergencyHolidayWorkerOrder =
+        WorkerOrder emergencyHolidayWorkerOrder =
                 emergencyWorkdaysService.getEmergencyWorkerOrder(inputView.readHolidayEmergencyWorkers());
 
-        return new EmergencyWorkerOrders(emergencyNonHolidayWorkerOrder, emergencyHolidayWorkerOrder);
+        return new WorkerOrders(emergencyNonHolidayWorkerOrder, emergencyHolidayWorkerOrder);
     }
 }

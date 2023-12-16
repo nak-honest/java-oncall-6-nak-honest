@@ -6,20 +6,20 @@ import oncall.domain.iterator.LoopIterator;
 
 import java.util.*;
 
-public class EmergencyWorkdaysScheduler {
+public class WorkdaysScheduler {
     private final Queue<Worker> restHolidayWorkers = new LinkedList<>();
     private final Queue<Worker> restNonHolidayWorkers = new LinkedList<>();
     private final List<WorkDate> workDates = new ArrayList<>();
 
-    public EmergencyWorkdaysScheduler() {
+    public WorkdaysScheduler() {
     }
 
-    public EmergencyWorkdaysSchedule schedule(Dates dates, EmergencyWorkerOrders emergencyWorkerOrders) {
-        LoopIterator<Worker> holidayWorkerIterator = emergencyWorkerOrders.getHolidayWorkerIterator();
-        LoopIterator<Worker> nonHolidayWorkerIterator = emergencyWorkerOrders.getNonHolidayWorkerIterator();
+    public WorkdaysSchedule schedule(Dates dates, WorkerOrders workerOrders) {
+        LoopIterator<Worker> holidayWorkerIterator = workerOrders.getHolidayWorkerIterator();
+        LoopIterator<Worker> nonHolidayWorkerIterator = workerOrders.getNonHolidayWorkerIterator();
         assignWorkerDates(dates, holidayWorkerIterator, nonHolidayWorkerIterator);
 
-        return new EmergencyWorkdaysSchedule(new ArrayList<>(workDates));
+        return new WorkdaysSchedule(new ArrayList<>(workDates));
     }
 
     private void assignWorkerDates(Dates dates, LoopIterator<Worker> holidayWorkerIterator,

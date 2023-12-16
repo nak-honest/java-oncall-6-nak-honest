@@ -16,4 +16,20 @@ public class WorkDate {
     public Worker getWorker() {
         return worker;
     }
+
+    public int getMonth() {
+        return date.getMonth().getValue();
+    }
+
+    public int getDay() {
+        return date.getDay();
+    }
+
+    public String getDayOfWeek() {
+        return date.getDayOfWeek();
+    }
+
+    public String getWorkerName() {
+        return worker.getName();
+    }
 }

@@ -34,4 +34,8 @@ public enum Month {
     public int getMaxDay() {
         return maxDay;
     }
+
+    public int getValue() {
+        return value;
+    }
 }

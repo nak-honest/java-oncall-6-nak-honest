@@ -31,4 +31,10 @@ public class EmergencyWorkdaysService {
                 .map(Worker::new)
                 .toList());
     }
+
+    public EmergencyWorkdaysSchedule schedule(Dates workDates, EmergencyWorkerOrder emergencyNonHolidayWorkerOrder,
+                                              EmergencyWorkerOrder emergencyHolidayWorkerOrder) {
+        return emergencyWorkdaysScheduler.schedule(workDates, emergencyNonHolidayWorkerOrder,
+                emergencyHolidayWorkerOrder);
+    }
 }

@@ -29,4 +29,8 @@ public enum DayOfWeek {
     public boolean isDayType(DayType dayType) {
         return dayType.equals(this.dayType);
     }
+
+    public String getValue() {
+        return value;
+    }
 }

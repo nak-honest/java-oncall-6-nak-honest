@@ -7,8 +7,8 @@ import oncall.domain.iterator.LoopIterator;
 import java.util.*;
 
 public class EmergencyWorkdaysScheduler {
-    public EmergencyWorkdaysSchedule schedule(Dates dates, EmergencyWorkerOrder holidayWorkerOrder,
-                                              EmergencyWorkerOrder nonHolidayWorkerOrder) {
+    public EmergencyWorkdaysSchedule schedule(Dates dates, EmergencyWorkerOrder nonHolidayWorkerOrder,
+                                              EmergencyWorkerOrder holidayWorkerOrder) {
         Queue<Worker> restHolidayWorkers = new LinkedList<>();
         Queue<Worker> restNonHolidayWorkers = new LinkedList<>();
         LoopIterator<Worker> holidayWorkerOrderIterator = holidayWorkerOrder.getLoopIterator();

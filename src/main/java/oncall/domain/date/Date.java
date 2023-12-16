@@ -3,16 +3,16 @@ package oncall.domain.date;
 public class Date {
     private final Month month;
     private final int day;
-    public final DayOfWeek DayOfWeek;
+    public final DayOfWeek dayOfWeek;
 
     public Date(Month month, int day, DayOfWeek DayOfWeek) {
         this.month = month;
         this.day = day;
-        this.DayOfWeek = DayOfWeek;
+        this.dayOfWeek = DayOfWeek;
     }
 
     public boolean isDayType(DayType dayType) {
-        return DayOfWeek.isDayType(dayType);
+        return dayOfWeek.isDayType(dayType);
     }
 
     public Month getMonth() {
@@ -21,5 +21,9 @@ public class Date {
 
     public int getDay() {
         return day;
+    }
+
+    public String getDayOfWeek() {
+        return dayOfWeek.getValue();
     }
 }

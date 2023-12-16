@@ -25,6 +25,7 @@ public class InputView {
         String input = reader.get();
         validateDelimiter(input);
         List<String> workMonth = Arrays.asList(input.split(INPUT_DELIMITER));
+        validateWorkMonth(workMonth);
 
         try {
             return new WorkMonthDto(Integer.parseInt(workMonth.get(MONTH_INDEX)),

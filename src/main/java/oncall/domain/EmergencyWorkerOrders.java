@@ -1,5 +1,7 @@
 package oncall.domain;
 
+import oncall.domain.iterator.LoopIterator;
+
 public class EmergencyWorkerOrders {
     private final EmergencyWorkerOrder nonHolidayEmergencyWorkerOrder;
     private final EmergencyWorkerOrder holidayEmergencyWorkerOrder;
@@ -19,11 +21,11 @@ public class EmergencyWorkerOrders {
         }
     }
 
-    public EmergencyWorkerOrder getNonHolidayEmergencyWorkerOrder() {
-        return nonHolidayEmergencyWorkerOrder;
+    public LoopIterator<Worker> getNonHolidayWorkerIterator() {
+        return nonHolidayEmergencyWorkerOrder.getLoopIterator();
     }
 
-    public EmergencyWorkerOrder getHolidayEmergencyWorkerOrder() {
-        return holidayEmergencyWorkerOrder;
+    public LoopIterator<Worker> getHolidayWorkerIterator() {
+        return holidayEmergencyWorkerOrder.getLoopIterator();
     }
 }

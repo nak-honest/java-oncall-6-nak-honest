@@ -15,30 +15,27 @@ public class EmergencyWorkdaysScheduler {
     }
 
     public EmergencyWorkdaysSchedule schedule(Dates dates, EmergencyWorkerOrders emergencyWorkerOrders) {
-        LoopIterator<Worker> holidayWorkerOrderIterator =
-                emergencyWorkerOrders.getHolidayEmergencyWorkerOrder().getLoopIterator();
-        LoopIterator<Worker> nonHolidayWorkerOrderIterator =
-                emergencyWorkerOrders.getNonHolidayEmergencyWorkerOrder().getLoopIterator();
-        assignWorkerDates(dates, holidayWorkerOrderIterator, nonHolidayWorkerOrderIterator);
+        LoopIterator<Worker> holidayWorkerIterator = emergencyWorkerOrders.getHolidayWorkerIterator();
+        LoopIterator<Worker> nonHolidayWorkerIterator = emergencyWorkerOrders.getNonHolidayWorkerIterator();
+        assignWorkerDates(dates, holidayWorkerIterator, nonHolidayWorkerIterator);
 
         return new EmergencyWorkdaysSchedule(new ArrayList<>(workDates));
     }
 
-    private void assignWorkerDates(Dates dates, LoopIterator<Worker> holidayWorkerOrderIterator,
-                                                   LoopIterator<Worker> nonHolidayWorkerOrderIterator) {
-        dates.getDates().forEach(date ->
-                assignWorkDate(date, holidayWorkerOrderIterator, nonHolidayWorkerOrderIterator));
+    private void assignWorkerDates(Dates dates, LoopIterator<Worker> holidayWorkerIterator,
+                                   LoopIterator<Worker> nonHolidayWorkerIterator) {
+        dates.getDates().forEach(date -> assignWorkDate(date, holidayWorkerIterator, nonHolidayWorkerIterator));
     }
 
-    private void assignWorkDate(Date date, LoopIterator<Worker> holidayWorkerOrderIterator,
-                                    LoopIterator<Worker> nonHolidayWorkerOrderIterator) {
+    private void assignWorkDate(Date date, LoopIterator<Worker> holidayWorkerIterator,
+                                    LoopIterator<Worker> nonHolidayWorkerIterator) {
         if (isHoliday(date)) {
-            Worker nextWorker = getNextWorker(workDates, holidayWorkerOrderIterator, restHolidayWorkers);
+            Worker nextWorker = getNextWorker(workDates, holidayWorkerIterator, restHolidayWorkers);
             workDates.add(new WorkDate(date, DateType.HOLIDAY, nextWorker));
             return;
         }
 
-        Worker nextWorker = getNextWorker(workDates, nonHolidayWorkerOrderIterator, restNonHolidayWorkers);
+        Worker nextWorker = getNextWorker(workDates, nonHolidayWorkerIterator, restNonHolidayWorkers);
         workDates.add(new WorkDate(date, DateType.NON_HOLIDAY, nextWorker));
     }
 
@@ -46,18 +43,18 @@ public class EmergencyWorkdaysScheduler {
         return StatutoryHolidays.isStatutoryHoliday(date) || date.isDayType(DayType.WEEKEND);
     }
 
-    private Worker getNextWorker(List<WorkDate> workDates, LoopIterator<Worker> workerOrder,
+    private Worker getNextWorker(List<WorkDate> workDates, LoopIterator<Worker> workerIterator,
                                  Queue<Worker> restWorkers) {
         if (workDates.isEmpty()) {
-            return workerOrder.next();
+            return workerIterator.next();
         }
         Worker previousWorker = workDates.get(workDates.size() - 1).getWorker();
 
         if (!restWorkers.isEmpty()) {
-            return getNextWorkerWithRestWorkers(previousWorker, workerOrder, restWorkers);
+            return getNextWorkerWithRestWorkers(previousWorker, workerIterator, restWorkers);
         }
 
-        return getNextWorkerWithoutRestWorkers(previousWorker, workerOrder, restWorkers);
+        return getNextWorkerWithoutRestWorkers(previousWorker, workerIterator, restWorkers);
     }
 
     private Worker getNextWorkerWithRestWorkers(Worker previousWorker, LoopIterator<Worker> workerOrder,
@@ -69,13 +66,13 @@ public class EmergencyWorkdaysScheduler {
         return restWorkers.poll();
     }
 
-    private Worker getNextWorkerWithoutRestWorkers(Worker previousWorker, LoopIterator<Worker> workerOrder,
+    private Worker getNextWorkerWithoutRestWorkers(Worker previousWorker, LoopIterator<Worker> workerIterator,
                                                    Queue<Worker> restWorkers) {
-        Worker nextWorker = workerOrder.next();
+        Worker nextWorker = workerIterator.next();
 
         if (previousWorker.equals(nextWorker)) {
             restWorkers.add(nextWorker);
-            return workerOrder.next();
+            return workerIterator.next();
         }
 
         return nextWorker;

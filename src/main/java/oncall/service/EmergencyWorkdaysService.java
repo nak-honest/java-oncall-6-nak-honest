@@ -1,9 +1,6 @@
 package oncall.service;
 
-import oncall.domain.EmergencyWorkdaysSchedule;
-import oncall.domain.EmergencyWorkdaysScheduler;
-import oncall.domain.EmergencyWorkerOrder;
-import oncall.domain.Worker;
+import oncall.domain.*;
 import oncall.domain.date.DateFactory;
 import oncall.domain.date.Dates;
 import oncall.domain.date.DayOfWeek;
@@ -32,9 +29,7 @@ public class EmergencyWorkdaysService {
                 .toList());
     }
 
-    public EmergencyWorkdaysSchedule schedule(Dates workDates, EmergencyWorkerOrder emergencyNonHolidayWorkerOrder,
-                                              EmergencyWorkerOrder emergencyHolidayWorkerOrder) {
-        return emergencyWorkdaysScheduler.schedule(workDates, emergencyNonHolidayWorkerOrder,
-                emergencyHolidayWorkerOrder);
+    public EmergencyWorkdaysSchedule schedule(Dates workDates, EmergencyWorkerOrders emergencyWorkerOrders) {
+        return emergencyWorkdaysScheduler.schedule(workDates, emergencyWorkerOrders);
     }
 }

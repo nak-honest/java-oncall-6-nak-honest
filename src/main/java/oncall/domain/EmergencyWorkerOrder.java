@@ -35,8 +35,16 @@ public final class EmergencyWorkerOrder {
         }
     }
 
-    public List<Worker> getWorkers() {
-        return Collections.unmodifiableList(workers);
+    public boolean hasSameWorker(EmergencyWorkerOrder otherWorkerOrder) {
+        return hasSameSize(otherWorkerOrder) && containsAll(otherWorkerOrder);
+    }
+
+    private boolean hasSameSize(EmergencyWorkerOrder otherWorkerOrder) {
+        return workers.size() == otherWorkerOrder.workers.size();
+    }
+
+    private boolean containsAll(EmergencyWorkerOrder otherWorkerOrder) {
+        return workers.containsAll(otherWorkerOrder.workers);
     }
 
     public LoopIterator<Worker> getLoopIterator() {

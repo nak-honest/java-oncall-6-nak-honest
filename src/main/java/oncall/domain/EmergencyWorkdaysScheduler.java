@@ -7,12 +7,13 @@ import oncall.domain.iterator.LoopIterator;
 import java.util.*;
 
 public class EmergencyWorkdaysScheduler {
-    public EmergencyWorkdaysSchedule schedule(Dates dates, EmergencyWorkerOrder nonHolidayWorkerOrder,
-                                              EmergencyWorkerOrder holidayWorkerOrder) {
+    public EmergencyWorkdaysSchedule schedule(Dates dates, EmergencyWorkerOrders emergencyWorkerOrders) {
         Queue<Worker> restHolidayWorkers = new LinkedList<>();
         Queue<Worker> restNonHolidayWorkers = new LinkedList<>();
-        LoopIterator<Worker> holidayWorkerOrderIterator = holidayWorkerOrder.getLoopIterator();
-        LoopIterator<Worker> nonHolidayWorkerOrderIterator = nonHolidayWorkerOrder.getLoopIterator();
+        LoopIterator<Worker> holidayWorkerOrderIterator =
+                emergencyWorkerOrders.getHolidayEmergencyWorkerOrder().getLoopIterator();
+        LoopIterator<Worker> nonHolidayWorkerOrderIterator =
+                emergencyWorkerOrders.getNonHolidayEmergencyWorkerOrder().getLoopIterator();
         List<WorkDate> workDates = new ArrayList<>();
 
         for (Date date : dates.getDates()) {

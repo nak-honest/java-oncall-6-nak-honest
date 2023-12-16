@@ -22,5 +22,7 @@ public class EmergencyWorkdaysController {
         Dates workDates = emergencyWorkdaysService.getWorkDates(inputView.readWorkMonth());
         EmergencyWorkerOrder emergencyNonHolidayWorkerOrder =
                 emergencyWorkdaysService.getEmergencyWorkerOrder(inputView.readNonHolidayEmergencyWorkers());
+        EmergencyWorkerOrder emergencyHolidayWorkerOrder =
+                emergencyWorkdaysService.getEmergencyWorkerOrder(inputView.readHolidayEmergencyWorkers());
     }
 }

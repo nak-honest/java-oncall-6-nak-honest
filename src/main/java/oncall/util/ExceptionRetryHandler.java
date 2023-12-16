@@ -15,14 +15,4 @@ public class ExceptionRetryHandler {
             }
         }
     }
-
-    public static <T, R> R retryUntilValid(Function<T, R> function, T argument) {
-        while (true) {
-            try {
-                return function.apply(argument);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage() + System.lineSeparator());
-            }
-        }
-    }
 }

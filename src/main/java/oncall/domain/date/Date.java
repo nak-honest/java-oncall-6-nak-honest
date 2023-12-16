@@ -10,4 +10,16 @@ public class Date {
         this.day = day;
         this.DayOfWeek = DayOfWeek;
     }
+
+    public boolean isDayType(DayType dayType) {
+        return DayOfWeek.isDayType(dayType);
+    }
+
+    public Month getMonth() {
+        return month;
+    }
+
+    public int getDay() {
+        return day;
+    }
 }

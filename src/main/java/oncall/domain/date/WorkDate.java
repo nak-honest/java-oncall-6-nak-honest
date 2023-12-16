@@ -32,4 +32,12 @@ public class WorkDate {
     public String getWorkerName() {
         return worker.getName();
     }
+
+    public boolean isDateType(DateType dateType) {
+        return this.dateType.equals(dateType);
+    }
+
+    public boolean isDayType(DayType dayType) {
+        return date.isDayType(dayType);
+    }
 }

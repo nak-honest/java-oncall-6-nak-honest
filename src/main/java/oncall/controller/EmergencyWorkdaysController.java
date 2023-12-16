@@ -6,6 +6,7 @@ import oncall.domain.EmergencyWorkerOrders;
 import oncall.domain.date.Dates;
 import oncall.dto.WorkMonthDto;
 import oncall.service.EmergencyWorkdaysService;
+import oncall.util.ExceptionRetryHandler;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
@@ -23,8 +24,9 @@ public class EmergencyWorkdaysController {
     }
 
     public void run() {
-        Dates workDates = selectWorkDates();
-        EmergencyWorkerOrders emergencyWorkerOrders = selectEmergencyWorkerOrders();
+        Dates workDates = ExceptionRetryHandler.retryUntilValid(this::selectWorkDates);
+        EmergencyWorkerOrders emergencyWorkerOrders =
+                ExceptionRetryHandler.retryUntilValid(this::selectEmergencyWorkerOrders);
 
         EmergencyWorkdaysSchedule emergencyWorkdaysSchedule =
                 emergencyWorkdaysService.schedule(workDates, emergencyWorkerOrders);

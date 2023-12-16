@@ -15,7 +15,7 @@ public class OutputView {
         this.writer = writer;
     }
 
-    public void writeEmergencyWorkdaysSchedule(WorkdaysSchedule workdaysSchedule) {
+    public void writeWorkdaysSchedule(WorkdaysSchedule workdaysSchedule) {
         writer.writeLine("");
 
         workdaysSchedule.getWorkDates().forEach(this::writeWorkDate);

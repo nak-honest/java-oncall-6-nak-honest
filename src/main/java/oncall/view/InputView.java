@@ -35,7 +35,7 @@ public class InputView {
         }
     }
 
-    public List<String> readNonHolidayEmergencyWorkers() {
+    public List<String> readNonHolidayWorkers() {
         writer.write("평일 비상 근무 순번대로 사원 닉네임을 입력하세요> ");
         String input = reader.get();
         validateDelimiter(input);
@@ -43,7 +43,7 @@ public class InputView {
         return Arrays.asList(input.split(INPUT_DELIMITER));
     }
 
-    public List<String> readHolidayEmergencyWorkers() {
+    public List<String> readHolidayWorkers() {
         writer.write("휴일 비상 근무 순번대로 사원 닉네임을 입력하세요> ");
         String input = reader.get();
         validateDelimiter(input);

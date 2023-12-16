@@ -23,7 +23,7 @@ public class EmergencyWorkdaysService {
         return DateFactory.createDates(month, startDayOfWeek);
     }
 
-    public WorkerOrder getEmergencyWorkerOrder(List<String> workers) {
+    public WorkerOrder getWorkerOrder(List<String> workers) {
         return new WorkerOrder(workers.stream()
                 .map(Worker::new)
                 .toList());

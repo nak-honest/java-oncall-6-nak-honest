@@ -24,13 +24,11 @@ public class EmergencyWorkdaysController {
 
     public void run() {
         Dates workDates = ExceptionRetryHandler.retryUntilValid(this::selectWorkDates);
-        WorkerOrders workerOrders =
-                ExceptionRetryHandler.retryUntilValid(this::selectEmergencyWorkerOrders);
+        WorkerOrders workerOrders = ExceptionRetryHandler.retryUntilValid(this::selectEmergencyWorkerOrders);
 
-        WorkdaysSchedule workdaysSchedule =
-                emergencyWorkdaysService.schedule(workDates, workerOrders);
+        WorkdaysSchedule workdaysSchedule = emergencyWorkdaysService.schedule(workDates, workerOrders);
 
-        outputView.writeEmergencyWorkdaysSchedule(workdaysSchedule);
+        outputView.writeWorkdaysSchedule(workdaysSchedule);
     }
 
     private Dates selectWorkDates() {
@@ -40,9 +38,9 @@ public class EmergencyWorkdaysController {
 
     private WorkerOrders selectEmergencyWorkerOrders() {
         WorkerOrder emergencyNonHolidayWorkerOrder =
-                emergencyWorkdaysService.getEmergencyWorkerOrder(inputView.readNonHolidayEmergencyWorkers());
+                emergencyWorkdaysService.getWorkerOrder(inputView.readNonHolidayWorkers());
         WorkerOrder emergencyHolidayWorkerOrder =
-                emergencyWorkdaysService.getEmergencyWorkerOrder(inputView.readHolidayEmergencyWorkers());
+                emergencyWorkdaysService.getWorkerOrder(inputView.readHolidayWorkers());
 
         return new WorkerOrders(emergencyNonHolidayWorkerOrder, emergencyHolidayWorkerOrder);
     }

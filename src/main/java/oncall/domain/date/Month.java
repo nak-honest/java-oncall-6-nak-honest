@@ -1,4 +1,4 @@
-package oncall.domain;
+package oncall.domain.date;
 
 import java.util.Arrays;
 
@@ -29,5 +29,9 @@ public enum Month {
                 .filter(month -> value == month.value)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 월입니다."));
+    }
+
+    public int getMaxDay() {
+        return maxDay;
     }
 }

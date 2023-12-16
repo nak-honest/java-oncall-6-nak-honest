@@ -1,5 +1,6 @@
-package oncall.domain;
+package oncall.domain.date;
 
+import oncall.domain.date.DayOfWeek;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
